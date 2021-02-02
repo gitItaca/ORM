@@ -19,7 +19,7 @@
         <property name="hibernate.format_sql">true</property>
 
         <!-- Validate the database schema on startup -->
-        <property name="hbm2ddl.auto">validate</property>
+        <property name="hbm2ddl.auto">validate</property>  
 
         <!-- Names the annotated entity class -->
         <mapping class="ACDT_practica02.ORM.model.Cliente"/>

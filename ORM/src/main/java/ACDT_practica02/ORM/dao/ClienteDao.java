@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -45,35 +46,18 @@ public class ClienteDao implements Dao<Cliente>{
 	}
 	
 	//CAMBIAR!!!!!!!!!!!!!!!!!!!!!
-	public void getByName(String nombre, Connection connect) {
-		try {
-			Statement stmt = connect.createStatement();
-	    	ResultSet resultSet = stmt.executeQuery("SELECT * FROM cliente WHERE nombre_cliente=\"" + nombre +"\""
-	    			+ " OR nombre_contacto = \"" + nombre + "\" OR apellido_contacto = \"" + nombre + "\"");
-
-	    	while (resultSet.next()) {
-	    		System.out.print(resultSet.getInt("codigo_cliente") + " - ");
-	    		System.out.print(resultSet.getString("nombre_cliente") + " - ");
-	    		System.out.print(resultSet.getString("nombre_contacto") + " - ");
-	    		System.out.print(resultSet.getString("apellido_contacto") + " - ");
-	    		System.out.print(resultSet.getString("telefono") + " - ");
-	    		System.out.print(resultSet.getString("fax") + " - ");
-	    		System.out.print(resultSet.getString("linea_direccion1") + " - ");
-	    		System.out.print(resultSet.getString("linea_direccion2") + " - ");
-	    		System.out.print(resultSet.getString("ciudad") + " - ");
-	    		System.out.print(resultSet.getString("region") + " - ");
-	    		System.out.print(resultSet.getString("pais") + " - ");
-	    		System.out.print(resultSet.getString("codigo_postal") + " - ");
-	    		System.out.print(resultSet.getInt("codigo_empleado_rep_ventas") + " - ");
-	    		System.out.print(resultSet.getDouble("limite_credito") + "\n");   
-			}
-	    	resultSet.close();
-	    	stmt.close();
-		} catch (SQLException e) {
-			System.out.println("Problema en la conexion con el metodo getByName");		
-			e.printStackTrace();
-		}		
+	public Cliente getByName(String nombre) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		Cliente cliente = (Cliente)session.createQuery("FROM Cliente c WHERE c.nombre_cliente = :nombre OR c.nombre_contacto = :nombre OR c.apellido_contacto = :nombre")
+				.setParameter("nombre", nombre)
+				.uniqueResult();
+    	        
+		session.getTransaction().commit();
+		session.close();
 		System.out.println();
+		return cliente;
 	}
 
 	@Override

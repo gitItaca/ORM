@@ -79,7 +79,28 @@ public class Leer {
 				System.out.println("Vuelve a inroducir el dato, por favor. ");
 				error = true;
 			} catch(NumberFormatException e){
-				System.out.println("El dato introducido no es entero.");
+				System.out.println("El dato introducido no es BigDecimal.");
+				System.out.println("Vuelve a introducir el dato, por favor.");
+				error=true;
+			}
+		}
+		return dato;
+	}
+	
+	static public short pedirShort() {
+		BufferedReader dataIn = new BufferedReader(new InputStreamReader(
+				System.in));
+		short dato= 0;
+		boolean error = true;
+		while (error) {
+			try {
+				dato = Short.parseShort(dataIn.readLine());
+				error=false;
+			} catch (IOException e) {
+				System.out.println("Vuelve a inroducir el dato, por favor. ");
+				error = true;
+			} catch(NumberFormatException e){
+				System.out.println("El dato introducido no es short.");
 				System.out.println("Vuelve a introducir el dato, por favor.");
 				error=true;
 			}

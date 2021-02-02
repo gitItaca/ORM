@@ -21,13 +21,15 @@ public class Aplicacion {
 	public static void main(String[] args) {
 		ClienteDao cDao = new ClienteDao();
 		ProductoDao pDao = new ProductoDao();
-		BigDecimal bd = new BigDecimal("83798350570");	
+		BigDecimal bd3 = new BigDecimal("3.00");	
+		BigDecimal bd1 = new BigDecimal("1.00");
 		
+//		System.out.println(cDao.getByName("Beragua"));
 //		System.out.println(cDao.get("1"));
-		System.out.println(pDao.get("10101"));
-		for(Producto producto : pDao.getAll()) {
-			System.out.println(producto.toString());
-		}
+//		System.out.println(pDao.get("10101"));
+//		for(Producto producto : pDao.getAll()) {
+//			System.out.println(producto.toString());
+//		}
 		
 		
 		//cDao.delete(cDao.get(95));
@@ -35,7 +37,10 @@ public class Aplicacion {
 //			System.out.println(cliente.toString());
 //		}
 //		Cliente cliente = new Cliente(73, "Gusti", "Yors", "Samy", "000799976", "976767676", "Direccion1", "Direccion2", "Lisboa", "Per", "Portugal", "7700098", 13, bd);
-//
+		Producto producto = new Producto("10101", "Buenafuente", "Frutales", "1,2", "Sonia", (short) 10, bd3, bd1);
+		pDao.update(producto);
+		System.out.println(pDao.get("10101"));
+		
 //		try {
 //			cDao.save(cliente);
 //		} catch (Exception e) {
