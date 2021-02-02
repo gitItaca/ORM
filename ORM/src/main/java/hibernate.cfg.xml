@@ -24,5 +24,6 @@
         <!-- Names the annotated entity class -->
         <mapping class="ACDT_practica02.ORM.model.Cliente"/>
         <mapping class="ACDT_practica02.ORM.model.Producto"/>
+       
     </session-factory>
 </hibernate-configuration>
